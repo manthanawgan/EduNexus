@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduNexus - Interactive Learning Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+        }
+        
+        /* Background image with overlay */
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: url('/api/placeholder/1200/800') center/cover no-repeat;
+        }
+        
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+        
+        /* Header styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .user-name {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        /* Main content styles */
+        main {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        
+        .welcome-text {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .welcome-text h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        
+        .welcome-text p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Subject cards */
+        .subjects-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .subjects-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        .subject-card {
+            flex: 1;
+            min-width: 250px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .subject-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .physics {
+            background-color: #e74c3c;
+        }
+        
+        .chemistry {
+            background-color: #2ecc71;
+        }
+        
+        .math {
+            background-color: #3498db;
+        }
+        
+        .subject-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        .subject-card p {
+            color: #7f8c8d;
+            margin-bottom: 1.5rem;
+        }
+        
+        .explore-btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .explore-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        /* Footer styles */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-col h4 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-col ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-col ul li a:hover {
+            color: #3498db;
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdc3c7;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background container -->
+    <div class="bg-container">
+        <div class="bg-overlay"></div>
+    </div>
+    
+    <!-- Header -->
+    <header>
+        <div class="logo">Edu<span>Nexus</span></div>
+        <div class="user-profile">
+            <div class="profile-icon">S</div>
+            <div class="user-name">Shlok</div>
+        </div>
+    </header>
+    
+    <!-- Main content -->
+    <main>
+        <div class="welcome-text">
+            <h1>Welcome to Interactive Learning</h1>
+            <p>Explore complex topics in Physics, Chemistry, and Mathematics through interactive simulations and visualizations designed to enhance your understanding.</p>
+        </div>
+        
+        <div class="subjects-container">
+            <!-- Physics card -->
+            <div class="subject-card">
+                <div class="subject-icon physics">⚛️</div>
+                <h3>Physics</h3>
+                <p>Discover the fundamental laws that govern our universe through interactive experiments and simulations.</p>
+                <button class="explore-btn">Explore Physics</button>
+            </div>
+            
+            <!-- Chemistry card -->
+            <div class="subject-card">
+                <div class="subject-icon chemistry">⚗️</div>
+                <h3>Chemistry</h3>
+                <p>Visualize molecular structures, chemical reactions, and laboratory experiments in an interactive environment.</p>
+                <button class="explore-btn">Explore Chemistry</button>
+            </div>
+            
+            <!-- Mathematics card -->
+            <div class="subject-card">
+                <div class="subject-icon math">📊</div>
+                <h3>Mathematics</h3>
+                <p>Master complex mathematical concepts through step-by-step problem solving and visual representations.</p>
+                <button class="explore-btn">Explore Mathematics</button>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>EduNexus</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Learning Guides</a></li>
+                    <li><a href="#">Video Tutorials</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 EduNexus. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
