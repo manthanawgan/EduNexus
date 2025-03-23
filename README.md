@@ -87,13 +87,13 @@ npm run build
 
 This will generate optimized production files in the `dist` directory.
 
-## Deployment
+<!-- ## Deployment
 
 The application can be deployed using various methods:
 
 - **Static Hosting**: Deploy the `dist` directory to services like Netlify, Vercel, or GitHub Pages
 - **Containerization**: Use Docker for consistent deployment across environments
-- **Full-Stack Deployment**: Deploy frontend and backend together on services like Heroku or AWS
+- **Full-Stack Deployment**: Deploy frontend and backend together on services like Heroku or AWS -->
 
 ## Contributing
 
