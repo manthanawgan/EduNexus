@@ -1,5 +1,8 @@
 # EduNexus
 
+![image](https://github.com/user-attachments/assets/7ee15955-489f-4d00-b515-60c6e30f6e3a)
+
+
 ## Project Overview
 EDUNEXUS is a web application designed to provide educational simulations with an intuitive interface. The project uses React with TypeScript for the frontend, Vite as the build tool, and integrates with a backend simulation engine.
 
